@@ -33,7 +33,16 @@ const router = new VueRouter({
     routes : routes
 })
 
+const newLocal = 'capitalizes';
 
+Vue.filter(newLocal,function(value){
+  if (! value) return ''
+  let values = value.toString().split(/[ ,]/);
+  for (let index in values){
+    values[index] =  values[index].charAt(0).toUpperCase() + values[index].slice(1)
+  }
+  return values.join(" ")
+})
 new Vue({
   router : router,
   render: h => h(App)

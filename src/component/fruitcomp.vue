@@ -1,6 +1,6 @@
 <template>
     <div id="fruitcomp">
-        <el-button @click='increment'>{{ num }}</el-button> {{name}}
+        <el-button @click='increment'>{{ num }}</el-button> {{name | capitalizes}}
     </div>
 </template>
 

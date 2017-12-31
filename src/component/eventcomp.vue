@@ -31,20 +31,31 @@
       </el-option>
     </el-select>
     <hr/>
+    <el-card>
+      <div slot="header">{{fruitView | capitalizes}}
+        <el-button class="headButton" size="mini"
+        @click="fruitToggle">{{ toggleLabel }}</el-button>
+      </div>
     <ul>
       <li v-for="(fruit, i) in fruits" :key="i" class='fruit'>
-        <fruitcomp :name='fruit.name'
+        <keep-alive>
+        <component :is="fruitView"
+        :name='fruit.name'
         :initNum='fruit.num'
-        @increment='incrementTotal'></fruitcomp>
+        :season='fruit.season'
+        @increment='incrementTotal'></component>
+        </keep-alive>
       </li>
     </ul>
-    <p>Total fruits: {{ftotal}}</p>
+    <p v-show="fruitView =='fruit edit'">Total fruits: {{ftotal}}</p>
+    </el-card>
     </el-card>
   </div>
 </template>
 
 <script>
   import fruitcomp from './fruitcomp.vue'
+  import fruitshow from './fruitshow.vue'
   export default {
     name: 'event_comp',
     data(){
@@ -56,6 +67,7 @@
         chosenDino: '',
         input:'',
         selectPeriods: '',
+        fruitView: 'fruit show',
         dinos:[
           "Triceratops", "Velociraptor", "Tyrannosaurus"
         ],
@@ -65,11 +77,11 @@
           {name:'Cretaceous', value:3}
         ],
         fruits:[
-          {name:"apple", num:5},
-          {name:'grape', num:6},
-          {name:"orange", num:3},
-          {name:"lemon", num:5},
-          {name:"peach", num:10}
+          {name:"apple", num:5, season: "autumn, winter"},
+          {name:'grape', num:6, season: "autumn"},
+          {name:"orange", num:3, season: "autumn"},
+          {name:"lemon", num:5, season: "spring"},
+          {name:"peach", num:10, season: "summer"}
         ]
       }
     },
@@ -79,10 +91,19 @@
       },
       incrementTotal:function(num){
         this.ftotal += num;
+      },
+      fruitToggle: function(){
+        this.fruitView = this.fruitView == "fruit show" ? "fruit edit" : "fruit show";
       }
     },
     components:{
-      fruitcomp,
+      "fruit edit":fruitcomp,
+      "fruit show":fruitshow
+    },
+    computed:{
+      toggleLabel: function(){
+        return this.fruitView == "fruit show" ? "edit" : "show";
+      }
     }
   }
 </script>
@@ -98,5 +119,8 @@
 }
 .fruit{
   height: 50px;
+}
+.headButton{
+  float: right;
 }
 </style>
