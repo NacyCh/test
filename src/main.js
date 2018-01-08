@@ -45,5 +45,19 @@ Vue.filter(newLocal,function(value){
 })
 new Vue({
   router : router,
-  render: h => h(App)
+  render: h => h(App),
+  data(){
+    return {
+      a: 'mm'
+    }
+  },
+  mounted: function(){
+    console.log()
+  },
+  beforeDestroy: function(){
+    console.log()
+  },
+  updated: function(){
+    console.log("haha")
+  }
 }).$mount('#app')

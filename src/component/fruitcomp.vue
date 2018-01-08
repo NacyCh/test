@@ -7,7 +7,10 @@
 <script>
     export default {
         name: "fruitcomp",
-        props: ["name", "initNum"],
+        props: {
+            name: String,
+            initNum: Number,
+            },
         data(){
             this.$emit('increment', this.initNum);
             return {

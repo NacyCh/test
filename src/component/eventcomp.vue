@@ -3,7 +3,7 @@
     <el-card class="my-card">
     <form @submit.prevent="addDinos">
       <el-button @click='addDinos' >Add {{amount}} Dinosaurs</el-button>
-      <el-input v-model="amount" class='addinput'></el-input>
+      <el-input v-model="amount" class='addinput' debounce=300></el-input>
       <!-- @keyup.enter.native="addDinos" -->
     </form>
    <p>You have {{total}} dinosaurs!</p>
@@ -67,7 +67,7 @@
         chosenDino: '',
         input:'',
         selectPeriods: '',
-        fruitView: 'fruit show',
+        fruitView: 'fruit edit',
         dinos:[
           "Triceratops", "Velociraptor", "Tyrannosaurus"
         ],

@@ -16,7 +16,7 @@ export default {
   name: 'app',
   data () {
     return {
-      msg: 'Welcome to Your Vue.js App'
+      msg: 'Welcome to Your Vue.js App',
     }
   }
 }
@@ -48,8 +48,5 @@ li {
 
 a {
   color: #42b983;
-}
-.origin_name:before{
-  content: ' /'
 }
 </style>
